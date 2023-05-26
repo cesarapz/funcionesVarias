@@ -48,20 +48,23 @@ if __name__ == '__main__':
     L = 50
     N = 20
     sistema = generar_sistema(N,L)
+    
+    #captura de las coordenadas del primer punto para usarlo como referencia del centrado
     xc = sistema.iloc[0,0]
     yc = sistema.iloc[0,1]
     zc = sistema.iloc[0,2]
     
+    #calculo de las distancias al centro de la caja en cada dimension
     dx = abs(xc - L/2)
     dy = abs(yc - L/2)
     dz = abs(zc - L/2)
     
-    
+    #impresion de prueba: en punto de referencia debe ir al centro!
     print('x_old:     ',xc)
     print('dx:        ',dx)
     print('x_new:     ',  centrar(xc,dx,L))
     
-    
+    #centraado del sistema
     sistema['x_c'] = sistema['x'].apply(centrar,args=(dx,L))
     sistema['y_c'] = sistema['y'].apply(centrar,args=(dy,L))
     sistema['z_c'] = sistema['z'].apply(centrar,args=(dz,L))
